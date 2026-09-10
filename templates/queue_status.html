@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Smart Queue - Prediction</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        Smart Queue<br>
+        Prediction
+    </h1>
+
+
+    {% if queue %}
+
+        <p>Service</p>
+
+        <h2>
+            {{ queue["service"] }}
+        </h2>
+
+
+        <!-- ========================= -->
+        <!-- QUEUE INFORMATION -->
+        <!-- ========================= -->
+
+        <div class="queue-stats">
+
+            <div class="stat-card">
+
+                <strong>
+                    #{{ queue["queue_number"] }}
+                </strong>
+
+                <span>
+                    Your Queue<br>
+                    Number
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong>
+                    {{ people_ahead }}
+                </strong>
+
+                <span>
+                    People<br>
+                    Ahead
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong>
+                    {{ estimated_wait }}
+                    <small>min</small>
+                </strong>
+
+                <span>
+                    Estimated<br>
+                    Wait
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- ========================= -->
+        <!-- STATUS -->
+        <!-- ========================= -->
+
+        <h2>
+            Queue Status
+        </h2>
+
+
+        <div class="status-badge">
+            🟢 Waiting
+        </div>
+
+
+        {% if people_ahead == 0 %}
+
+            <p class="queue-message">
+                🎉 You are next!
+                Please be ready for your turn.
+            </p>
+
+        {% elif estimated_wait <= 5 %}
+
+            <p class="queue-message">
+                ⏳ Your turn is coming soon!
+            </p>
+
+        {% else %}
+
+            <p class="queue-message">
+                ⏳ You have some waiting time.
+                You can relax for a while.
+            </p>
+
+        {% endif %}
+
+
+        <hr>
+
+
+        <!-- ========================= -->
+        <!-- AI PREDICTION -->
+        <!-- ========================= -->
+
+        <h2>
+            🤖 Smart Prediction
+        </h2>
+
+
+        <div class="prediction-box">
+
+            <p>
+                <strong>
+                    Estimated service time:
+                </strong>
+            </p>
+
+            <p class="prediction-number">
+                {{ average_time }} minutes
+            </p>
+
+
+            <p>
+                <strong>
+                    Prediction method:
+                </strong>
+            </p>
+
+            <p>
+                {{ prediction_method }}
+            </p>
+
+        </div>
+
+
+        <hr>
+<!-- ========================= -->
+<!-- PEAK HOUR PREDICTION -->
+<!-- ========================= -->
+
+<h2>
+    📈 Peak-Hour Prediction
+</h2>
+
+<div class="peak-box">
+
+    <p id="peakStatus">
+        Checking current queue demand...
+    </p>
+
+    <p id="peakAdvice"></p>
+
+</div>
+
+<script>
+
+    const currentHour = new Date().getHours();
+
+    const service = "{{ queue['service'] }}";
+
+    let peak = false;
+    let message = "";
+
+    /*
+       Peak periods are based on typical
+       service usage patterns.
+    */
+
+    if (
+        service === "Cafeteria" ||
+        service === "Mess" ||
+        service === "Food Court"
+    ) {
+
+        if (
+            (currentHour >= 12 && currentHour <= 14) ||
+            (currentHour >= 19 && currentHour <= 21)
+        ) {
+
+            peak = true;
+
+        }
+
+    }
+
+    else if (service === "Coffee Shop") {
+
+        if (
+            (currentHour >= 8 && currentHour <= 10) ||
+            (currentHour >= 16 && currentHour <= 18)
+        ) {
+
+            peak = true;
+
+        }
+
+    }
+
+    else if (service === "Hospital") {
+
+        if (
+            currentHour >= 9 &&
+            currentHour <= 13
+        ) {
+
+            peak = true;
+
+        }
+
+    }
+
+    else if (
+        service === "Bank" ||
+        service === "Government Office" ||
+        service === "College Office"
+    ) {
+
+        if (
+            currentHour >= 10 &&
+            currentHour <= 14
+        ) {
+
+            peak = true;
+
+        }
+
+    }
+
+
+    if (peak) {
+
+        document.getElementById(
+            "peakStatus"
+        ).innerHTML =
+            "🔴 <strong>Peak Period</strong>";
+
+        document.getElementById(
+            "peakAdvice"
+        ).innerHTML =
+            "This service is currently expected to be busy. Waiting time may be higher than usual.";
+
+    }
+
+    else {
+
+        document.getElementById(
+            "peakStatus"
+        ).innerHTML =
+            "🟢 <strong>Low / Normal Period</strong>";
+
+        document.getElementById(
+            "peakAdvice"
+        ).innerHTML =
+            "This is currently outside the expected peak period.";
+
+    }
+
+</script>
+
+        <!-- ========================= -->
+        <!-- CALCULATION -->
+        <!-- ========================= -->
+
+        <h3>
+            How is this calculated?
+        </h3>
+
+
+        <p>
+            The system considers your queue position
+            and the estimated service time for the
+            selected service.
+        </p>
+
+
+        {% if prediction_method == "AI / ML prediction" %}
+
+            <p>
+                🤖 The Random Forest ML model uses
+                historical service data, service type,
+                time of day and day of week to estimate
+                service time.
+            </p>
+
+        {% else %}
+
+            <p>
+                ℹ️ The system is using the default
+                service-time estimate because there
+                is not enough matching historical data
+                for the selected service.
+            </p>
+
+        {% endif %}
+
+
+        <br>
+
+
+        <a
+            href="/dashboard"
+            class="dashboard-button"
+        >
+            Back to Dashboard
+        </a>
+
+
+        <br><br>
+
+
+        <a href="/logout">
+            Logout
+        </a>
+
+
+    {% else %}
+
+        <h2>
+            No Active Queue
+        </h2>
+
+        <p>
+            You are not currently waiting in a queue.
+        </p>
+
+
+        <a
+            href="/dashboard"
+            class="dashboard-button"
+        >
+            Go to Dashboard
+        </a>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>

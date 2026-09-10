@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Smart Queue - Admin Panel</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Admin Dashboard</h1>
+
+    <p>Smart Queue Management System</p>
+
+    <hr>
+
+
+    <!-- ========================= -->
+    <!-- SUMMARY -->
+    <!-- ========================= -->
+
+    <h2>📊 Queue Overview</h2>
+
+    <div class="queue-stats">
+
+        <div class="stat-card">
+
+            <strong>
+                {{ total_waiting }}
+            </strong>
+
+            <span>
+                People<br>
+                Waiting
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <strong>
+                {{ completed_today }}
+            </strong>
+
+            <span>
+                Completed<br>
+                Today
+            </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <strong>
+                {{ total_completed }}
+            </strong>
+
+            <span>
+                Total<br>
+                Completed
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- ========================= -->
+    <!-- COUNTERS -->
+    <!-- ========================= -->
+
+    <h2>🏢 Counter Status</h2>
+
+    <div class="counter-grid">
+
+        {% for counter_number in range(1, 4) %}
+
+            <div class="counter-card">
+
+                <h3>
+                    Counter {{ counter_number }}
+                </h3>
+
+
+                <p>
+
+                    {% set counter_found = false %}
+
+                    {% for item in counter_load %}
+
+                        {% if item["counter"] == counter_number %}
+
+                            {% set counter_found = true %}
+
+                            {% if item["waiting"] == 0 %}
+
+                                <span class="available">
+                                    🟢 Available
+                                </span>
+
+                            {% elif item["waiting"] <= 2 %}
+
+                                <span class="busy">
+                                    🟡 Busy
+                                </span>
+
+                            {% else %}
+
+                                <span class="very-busy">
+                                    🔴 Very Busy
+                                </span>
+
+                            {% endif %}
+
+                            <br>
+
+                            <strong>
+                                {{ item["waiting"] }}
+                            </strong>
+
+                            waiting
+
+                        {% endif %}
+
+                    {% endfor %}
+
+
+                    {% if not counter_found %}
+
+                        <span class="available">
+                            🟢 Available
+                        </span>
+
+                        <br>
+
+                        0 waiting
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- ========================= -->
+    <!-- ACTIVE QUEUES -->
+    <!-- ========================= -->
+
+    <h2>🎫 Active Queues</h2>
+
+
+    {% if queues %}
+
+        {% for queue in queues %}
+
+            <div class="admin-queue-card">
+
+                <h3>
+                    #{{ queue["queue_number"] }}
+                </h3>
+
+
+                <p>
+                    <strong>
+                        Service:
+                    </strong>
+
+                    {{ queue["service"] }}
+                </p>
+
+
+                <p>
+                    <strong>
+                        Customer:
+                    </strong>
+
+                    {{ queue["name"] }}
+                </p>
+
+
+                <p>
+                    <strong>
+                        Counter:
+                    </strong>
+
+                    🏢 Counter
+                    {{ queue["counter"] }}
+                </p>
+
+
+                <p>
+                    <strong>
+                        Joined:
+                    </strong>
+
+                    {{ queue["joined_at"] }}
+                </p>
+
+
+                <p>
+                    {% if queue["status"] == "Waiting" %}
+
+    <span class="status-badge">
+        🟡 Waiting
+    </span>
+
+{% elif queue["status"] == "Serving" %}
+
+    <span class="status-badge">
+        🔵 Serving
+    </span>
+
+{% endif %}
+                </p>
+
+
+                {% if queue["status"] == "Waiting" %}
+
+    <a
+        href="/start_serving/{{ queue['id'] }}"
+        class="complete-button"
+    >
+        🟡 Start Serving
+    </a>
+
+{% elif queue["status"] == "Serving" %}
+
+    <a
+        href="/complete/{{ queue['id'] }}"
+        class="complete-button"
+    >
+        🔴 Complete Queue
+    </a>
+
+{% endif %}
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            🎉 No active queues right now.
+        </p>
+
+    {% endif %}
+
+
+    <hr>
+
+
+    <!-- ========================= -->
+    <!-- BUSIEST SERVICE -->
+    <!-- ========================= -->
+
+    <h2>🔥 Busiest Service</h2>
+
+    <div class="prediction-box">
+
+        <p>
+            <strong>
+                {{ busiest_service }}
+            </strong>
+        </p>
+
+        <p>
+            {{ busiest_count }}
+            people currently waiting
+        </p>
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- ========================= -->
+    <!-- AVERAGE SERVICE TIME -->
+    <!-- ========================= -->
+
+    <h2>⏱️ Average Service Time</h2>
+
+    {% if average_service_time > 0 %}
+
+        <div class="prediction-box">
+
+            <p class="prediction-number">
+                {{ average_service_time }}
+                minutes
+            </p>
+
+            <p>
+                Average time based on completed
+                queues.
+            </p>
+
+        </div>
+
+    {% else %}
+
+        <p>
+            Not enough completed data yet.
+        </p>
+
+    {% endif %}
+
+
+    <hr>
+
+
+    <!-- ========================= -->
+    <!-- SERVICE PERFORMANCE -->
+    <!-- ========================= -->
+
+    <h2>📈 Service Performance</h2>
+
+
+    {% if service_performance %}
+
+        {% for service in service_performance %}
+
+            <div class="performance-card">
+
+                <h3>
+                    {{ service["service"] }}
+                </h3>
+
+                <p>
+                    Completed:
+                    <strong>
+                        {{ service["completed_count"] }}
+                    </strong>
+                </p>
+
+                <p>
+                    Average service time:
+                    <strong>
+                        {{ service["average_time"] }}
+                        min
+                    </strong>
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            No historical service data available yet.
+        </p>
+
+    {% endif %}
+
+
+    <hr>
+
+
+    <!-- ========================= -->
+    <!-- LOGOUT -->
+    <!-- ========================= -->
+
+    <a href="/logout">
+        Logout
+    </a>
+
+</div>
+
+</body>
+
+</html>

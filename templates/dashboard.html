@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Smart Queue - Student Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="student-dashboard">
+
+    <!-- ============================= -->
+    <!-- HEADER -->
+    <!-- ============================= -->
+
+    <div class="dashboard-header">
+
+        <div>
+            <h1>Smart Queue</h1>
+
+            <p>
+                Queue Prediction & Management System
+            </p>
+        </div>
+
+        <a href="/logout" class="logout-button">
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- WELCOME -->
+    <!-- ============================= -->
+
+    <div class="welcome-section">
+
+        <h2>
+            Welcome, {{ name }}! 👋
+        </h2>
+
+        <p>
+            Manage your queue and save your waiting time.
+        </p>
+
+    </div>
+
+
+    {% if active_queue %}
+
+    <!-- ============================= -->
+    <!-- ACTIVE QUEUE -->
+    <!-- ============================= -->
+
+    <div class="queue-active-card">
+
+        <div class="queue-card-header">
+
+            <div>
+
+                <span class="small-label">
+                    YOUR ACTIVE QUEUE
+                </span>
+
+                <h2>
+                    {{ active_queue["service"] }}
+                </h2>
+
+            </div>
+
+            <span class="status-badge">
+                🟢 Waiting
+            </span>
+
+        </div>
+
+
+        <div class="queue-number-display">
+
+            <span>Your Queue Number</span>
+
+            <strong>
+                #{{ active_queue["queue_number"] }}
+            </strong>
+
+        </div>
+
+
+        <a
+            href="/queue_status"
+            class="primary-dashboard-button"
+        >
+            View Queue Status
+        </a>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- INFORMATION -->
+    <!-- ============================= -->
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ⏱️
+            </div>
+
+            <h3>
+                Smart Prediction
+            </h3>
+
+            <p>
+                Get an estimated waiting time
+                based on your queue position.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                👥
+            </div>
+
+            <h3>
+                Queue Tracking
+            </h3>
+
+            <p>
+                See how many people are ahead
+                of you in real time.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                🍔
+            </div>
+
+            <h3>
+                Food Points
+            </h3>
+
+            <p>
+                Join queues for cafeterias,
+                food courts and other counters.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- ============================= -->
+    <!-- JOIN QUEUE -->
+    <!-- ============================= -->
+
+    <div class="join-queue-card">
+
+        <div class="join-icon">
+            🎫
+        </div>
+
+        <h2>
+            Join a Queue
+        </h2>
+
+        <p>
+            Select the service or food point
+            you want to visit.
+        </p>
+
+
+        <form
+            method="POST"
+            action="/join_queue"
+        >
+
+            <label for="service">
+                Select Service
+            </label>
+
+            <select
+                name="service"
+                id="service"
+                required
+            >
+
+                <option value="" disabled selected>
+                    Choose a service
+                </option>
+
+                <option value="Bank">
+                    🏦 Bank
+                </option>
+
+                <option value="Hospital">
+                    🏥 Hospital
+                </option>
+
+                <option value="College Office">
+                    🎓 College Office
+                </option>
+
+                <option value="Government Office">
+                    🏛️ Government Office
+                </option>
+
+                <option value="Cafeteria">
+                    🍔 Cafeteria
+                </option>
+
+                <option value="Food Court">
+                    🍽️ Food Court
+                </option>
+
+                <option value="Coffee Shop">
+                    ☕ Coffee Shop
+                </option>
+
+                <option value="Mess">
+                    🍛 Mess
+                </option>
+
+                <option value="Juice Counter">
+                    🥤 Juice Counter
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="primary-dashboard-button"
+            >
+                Join Queue →
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- FEATURES -->
+    <!-- ============================= -->
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                ⏱️
+            </div>
+
+            <h3>
+                Smart Prediction
+            </h3>
+
+            <p>
+                Know your estimated waiting
+                time before reaching the counter.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                📊
+            </div>
+
+            <h3>
+                Queue Analytics
+            </h3>
+
+            <p>
+                The system uses queue data
+                to estimate waiting time.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                🍔
+            </div>
+
+            <h3>
+                Multiple Services
+            </h3>
+
+            <p>
+                Choose from offices, cafeterias,
+                food courts and counters.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ============================= -->
+    <!-- FOOTER -->
+    <!-- ============================= -->
+
+    <div class="dashboard-footer">
+
+        <p>
+            Smart Queue Management System
+        </p>
+
+        <span>
+            Queue smarter • Wait less
+        </span>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

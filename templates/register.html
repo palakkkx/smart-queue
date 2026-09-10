@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Queue - Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Create Account</h1>
+        <p>Register for Smart Queue</p>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter Name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create Password"
+                required
+            >
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p class="register-text">
+            Already have an account?
+            <a href="/">Login</a>
+        </p>
+    </div>
+
+</body>
+</html>

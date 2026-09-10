@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Queue - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Smart Queue</h1>
+
+        <p>Queue Prediction & Management System</p>
+
+        <form method="POST" action="/login">
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p class="register-text">
+            New user?
+            <a href="/register">Create an account</a>
+        </p>
+
+    </div>
+
+</body>
+</html>

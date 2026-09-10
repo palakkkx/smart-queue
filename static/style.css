@@ -1,0 +1,712 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f6ff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    background: white;
+    width: 350px;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    width: 96%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.register-text {
+    margin-top: 20px;
+}
+select {
+    width: 96%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #f1f5f9;
+}
+.admin-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.stat-box {
+    flex: 1;
+    padding: 20px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-box h2 {
+    font-size: 32px;
+    margin: 5px;
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.service-box {
+    padding: 15px;
+    width: 180px;
+    background: #f8fafc;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.service-box h3 {
+    margin-bottom: 5px;
+}
+
+.admin-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-container th,
+.admin-container td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.admin-container th {
+    background: #f1f5f9;
+}
+.prediction-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.prediction-item {
+    flex: 1;
+    padding: 15px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.prediction-item h3 {
+    font-size: 28px;
+    margin: 5px;
+}
+
+.prediction-item p {
+    margin: 5px;
+}
+
+.status {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    background: #e2e8f0;
+}
+/* =========================================
+   ADMIN DASHBOARD
+   ========================================= */
+
+.admin-container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+}
+
+.admin-container h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.admin-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+
+/* STATISTICS */
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.admin-stat {
+    background: #f1f5f9;
+    padding: 22px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 28px;
+}
+
+.admin-stat h2 {
+    font-size: 27px;
+    margin: 8px 0;
+}
+
+.admin-stat p {
+    margin: 0;
+    color: #555;
+}
+
+
+/* SERVICE CARDS */
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0 35px;
+}
+
+.service-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+}
+
+.service-card h3 {
+    margin-top: 0;
+}
+
+.service-number {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.service-card p {
+    margin: 0;
+    color: #666;
+}
+
+
+/* TABLE */
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 35px;
+}
+
+.admin-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-container th,
+.admin-container td {
+    padding: 13px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.admin-container th {
+    background: #f1f5f9;
+}
+
+
+/* WAITING BADGE */
+
+.waiting-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #e2e8f0;
+    font-weight: bold;
+}
+
+
+/* COMPLETE BUTTON */
+
+.complete-button {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.complete-button:hover {
+    opacity: 0.85;
+}
+
+
+/* PERFORMANCE */
+
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.performance-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.performance-card h3 {
+    margin-top: 0;
+}
+
+
+/* EMPTY MESSAGE */
+
+.empty-message {
+    padding: 25px;
+    text-align: center;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin: 20px 0 30px;
+}
+
+
+/* ACTIONS */
+
+.admin-actions {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+.refresh-button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+.chart-box {
+    width: 100%;
+    max-width: 900px;
+    height: 350px;
+    margin: 20px auto 40px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 14px;
+    box-sizing: border-box;
+}
+/* =========================================
+   STUDENT DASHBOARD
+   ========================================= */
+
+.student-dashboard {
+    width: 92%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+
+/* HEADER */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 22px 28px;
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.dashboard-header p {
+    margin: 5px 0 0;
+    color: #666;
+}
+
+.logout-button {
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: #222;
+}
+
+
+/* WELCOME */
+
+.welcome-section {
+    margin: 30px 5px 20px;
+}
+
+.welcome-section h2 {
+    margin-bottom: 5px;
+}
+
+.welcome-section p {
+    color: #666;
+}
+
+
+/* ACTIVE QUEUE */
+
+.queue-active-card {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+.queue-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.small-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #777;
+    letter-spacing: 1px;
+}
+
+.queue-card-header h2 {
+    margin-top: 8px;
+}
+
+.status-badge {
+    background: #e2e8f0;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+
+/* QUEUE NUMBER */
+
+.queue-number-display {
+    text-align: center;
+    margin: 30px 0;
+    padding: 25px;
+    background: #f1f5f9;
+    border-radius: 14px;
+}
+
+.queue-number-display span {
+    display: block;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.queue-number-display strong {
+    font-size: 48px;
+}
+
+
+/* JOIN QUEUE */
+
+.join-queue-card {
+    background: white;
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 35px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.join-icon {
+    font-size: 45px;
+}
+
+.join-queue-card h2 {
+    margin-bottom: 8px;
+}
+
+.join-queue-card p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.join-queue-card form {
+    text-align: left;
+}
+
+.join-queue-card label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.join-queue-card select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 18px;
+    box-sizing: border-box;
+}
+
+
+/* MAIN BUTTON */
+
+.primary-dashboard-button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.primary-dashboard-button:hover {
+    opacity: 0.9;
+}
+
+
+/* INFORMATION CARDS */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 25px 0;
+}
+
+.info-card {
+    background: white;
+    padding: 24px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.info-icon {
+    font-size: 30px;
+}
+
+.info-card h3 {
+    margin-bottom: 8px;
+}
+
+.info-card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+
+/* FOOTER */
+
+.dashboard-footer {
+    text-align: center;
+    padding: 25px;
+    color: #777;
+}
+
+.dashboard-footer p {
+    margin-bottom: 5px;
+}
+
+.dashboard-footer span {
+    font-size: 13px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .dashboard-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .queue-card-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+}
+/* =========================================
+   PEAK HOUR PREDICTION
+   ========================================= */
+
+.peak-box {
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.peak-box p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+/* =========================================
+   ADMIN COUNTERS
+   ========================================= */
+
+.counter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.counter-card {
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+}
+
+.counter-card h3 {
+    margin-top: 0;
+}
+
+.available {
+    font-weight: bold;
+}
+
+.busy {
+    font-weight: bold;
+}
+
+.very-busy {
+    font-weight: bold;
+}
+
+
+/* =========================================
+   ADMIN QUEUE CARDS
+   ========================================= */
+
+.admin-queue-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 18px;
+    margin: 15px 0;
+    text-align: left;
+    border: 1px solid #e2e8f0;
+}
+
+.admin-queue-card h3 {
+    text-align: center;
+    font-size: 28px;
+}
+
+.complete-button {
+    display: block;
+    text-align: center;
+    background: #2563eb;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+
+/* =========================================
+   PERFORMANCE CARDS
+   ========================================= */
+
+.performance-card {
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+}
